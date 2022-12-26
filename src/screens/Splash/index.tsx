@@ -13,7 +13,7 @@ export const Splash = ({ navigation }: NavigationProps) => {
     }, []);
     return (
         <Box style={styles.container}>
-            <Logo />
+            <Logo height="100" width="150" />
             <Text
                 fontWeight="500"
                 style={styles.containerText}

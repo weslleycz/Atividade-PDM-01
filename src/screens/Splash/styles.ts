@@ -7,10 +7,9 @@ export const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
     },
-    containerText:{
-        backgroundColor: "#8257E5",
-        width:"40%",
-        marginTop:"5%",
-        textAlign:"center",
-    }
+    containerText: {
+        width: "40%",
+        marginTop: "1%",
+        textAlign: "center",
+    },
 });

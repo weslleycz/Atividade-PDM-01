@@ -1,8 +1,14 @@
 import Svg, { Path } from "react-native-svg";
-export const Logo = () => {
+
+type Pros={
+    width:string,
+    height:string,
+}
+
+export const Logo = ({width,height}:Pros) => {
     return (
         <>
-            <Svg width="160" height="44" viewBox="0 0 160 44" fill="none">
+            <Svg width={width} height={height} viewBox="0 0 160 44" fill="none">
                 <Path
                     d="M22.8256 11.7612V19.8209H16.1854V31.8209C16.1854 33.2537 16.4226 34.3085 16.8969 34.9851C17.3712 35.6219 18.2407 35.9403 19.5055 35.9403H22.8256V42.9254C21.877 43.2438 20.6517 43.5025 19.1498 43.7015C17.6478 43.9005 16.3435 44 15.2368 44C11.7586 44 9.07094 43.3632 7.17375 42.0896C5.31609 40.8159 4.38725 38.6468 4.38725 35.5821V19.8209H0V11.7612H4.86155L7.4109 2.20896H16.1854V11.7612H22.8256Z"
                     fill="white"

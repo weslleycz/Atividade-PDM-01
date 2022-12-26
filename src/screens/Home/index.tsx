@@ -1,3 +1,10 @@
+import { HomeContainer } from "../../components/molecules/HomeContainer"
+import { Header } from "../../components/molecules/Header";
+
 export const Home = () => {
-    return(<></>)
+    return(<>
+    <HomeContainer>
+        <Header />
+    </HomeContainer>
+    </>)
 }
