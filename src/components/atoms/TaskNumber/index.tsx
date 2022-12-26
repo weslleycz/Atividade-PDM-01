@@ -1,14 +1,13 @@
 import { Text } from "native-base";
+import { useContext } from "react";
+import { TasksContext } from "../../../screens/Home";
 
-type Pros = {
-    amount:number
-};
-
-export const TaskNumber = ({amount}: Pros) => {
+export const TaskNumber = () => {
+    const tasksContext = useContext(TasksContext);
     return (
         <>
             <Text fontWeight="500" color={"warmGray.100"} fontSize="md">
-                Você tem <Text bold>{amount} tarefas</Text>
+                Você tem <Text bold>{tasksContext?.tasks?.length} tarefas</Text>
             </Text>
         </>
     );
