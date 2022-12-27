@@ -1,8 +1,10 @@
-import { Box, Checkbox, HStack, Text } from "native-base";
+import { Feather } from "@expo/vector-icons";
+import { Box, HStack, Text } from "native-base";
 import { useContext, useEffect, useState } from "react";
 import { Alert, TouchableOpacity } from "react-native";
 import { deletData } from "../../../database/deletValue";
 import { getValue } from "../../../database/getValue";
+import { updateValue } from "../../../database/updateValue";
 import { TasksContext } from "../../../screens/Home";
 import { getAllTask } from "../../../services/getAllTask";
 import { Itask } from "../../../types/Itask";
@@ -31,10 +33,16 @@ export const Task = ({ id, index }: Props) => {
                 text: "OK",
                 onPress: async () => {
                     await deletData(id);
-                    getAllTask(tasksContext?.setTasks);
+                    await getAllTask(tasksContext?.setTasks);
                 },
             },
         ]);
+    };
+
+    const handleCheckbox = async (id: string) => {
+        await updateValue(id, { ...taskData, status: !taskData?.status });
+        const data = (await getValue(id)) as Itask;
+        setTaskData(data);
     };
 
     useEffect(() => {
@@ -48,16 +56,40 @@ export const Task = ({ id, index }: Props) => {
         <Box style={styles.taskButton} bg={index % 2 == 0 ? "#e3e3e4" : ""}>
             <HStack style={styles.cont}>
                 <Box>
-                    <HStack space={3} justifyContent="center">
-                        <Checkbox
-                            bg={"#e3e3e4"}
-                            value="test"
-                            accessibilityLabel="This is a dummy checkbox"
-                            colorScheme={"success"}
-                            defaultIsChecked={taskData?.status}
-                        />
+                    <HStack space={1} justifyContent="center">
+                        <TouchableOpacity
+                            onPress={() => handleCheckbox(id)}
+                            testID={`button-${index}`}
+                            activeOpacity={0.7}
+                            style={styles.taskButton}
+                        >
+                            <Box
+                                style={
+                                    taskData?.status
+                                        ? styles.taskMarkerDone
+                                        : styles.taskMarker
+                                }
+                                testID={`marker-${index}`}
+                            >
+                                {taskData?.status && (
+                                    <Feather
+                                        name="check"
+                                        size={12}
+                                        color="#FFF"
+                                    />
+                                )}
+                            </Box>
+                        </TouchableOpacity>
+
                         <Text
+                            onPress={() => handleCheckbox(id)}
                             color={taskData?.status ? "#1DB863" : "#666666"}
+                            style={{
+                                textDecorationLine: taskData?.status
+                                    ? "line-through"
+                                    : "none",
+                                marginTop: 5,
+                            }}
                             fontSize="lg"
                         >
                             {taskData?.title}
@@ -66,8 +98,19 @@ export const Task = ({ id, index }: Props) => {
                 </Box>
                 <Box style={{ marginLeft: "60%" }}>
                     <HStack justifyContent="center">
-                        <PenIcon height="30" width="48" />
-                        <TouchableOpacity onPress={() => handleDeletTask(id)}>
+                        <TouchableOpacity
+                            style={{
+                                marginTop: 5,
+                            }}
+                        >
+                            <PenIcon height="30" width="48" />
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={{
+                                marginTop: 5,
+                            }}
+                            onPress={() => handleDeletTask(id)}
+                        >
                             <TrashIcon height="30" width="48" />
                         </TouchableOpacity>
                     </HStack>

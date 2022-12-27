@@ -1,9 +1,8 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Task } from "../types/Itask";
 
 type Data = {
     kay: string;
-    value: Task;
+    value: any;
 };
 
 export const setValue = async ({ kay, value }: Data) => {
