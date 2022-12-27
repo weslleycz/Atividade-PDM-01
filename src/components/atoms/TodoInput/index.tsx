@@ -1,7 +1,6 @@
 import { Box } from "native-base";
 import { useContext, useState } from "react";
 import { TextInput, TouchableOpacity } from "react-native";
-import uuid from "react-native-uuid";
 import Icon from "react-native-vector-icons/Feather";
 import { setValue } from "../../../database/setValue";
 import { TasksContext } from "../../../screens/Home";
@@ -18,10 +17,14 @@ export const TodoInput = () => {
                 title: text,
                 status: false,
             };
-            const kay = uuid.v4() as string;
-            await setValue({ kay, value: task });
-            setText("");
-            getAllTask(tasksContext?.setTasks);
+            if (!tasksContext?.tasks?.includes(text)) {
+                const kay = text as string;
+                await setValue({ kay, value: task });
+                setText("");
+                getAllTask(tasksContext?.setTasks);
+            } else {
+                alert("Uma tarefa como o mesmo nome já esta cadastrada!");
+            }
         }
     };
 
