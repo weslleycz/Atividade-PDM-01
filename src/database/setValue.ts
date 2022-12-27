@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Task } from "../types/Task";
+import { Task } from "../types/Itask";
 
 type Data = {
     kay: string;

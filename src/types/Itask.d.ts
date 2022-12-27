@@ -1,4 +1,4 @@
-export type Task = {
+export type Itask = {
     title: string;
     status: boolean;
 };

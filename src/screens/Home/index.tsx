@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { Header } from "../../components/molecules/Header";
 import { HomeContainer } from "../../components/molecules/HomeContainer";
+import { TasksList } from "../../components/organisms/TasksList";
 import { getAllTask } from "../../services/getAllTask";
 import { ItasksContext } from "../../types/ItasksContext";
 
@@ -17,6 +18,7 @@ export const Home = () => {
             <TasksContext.Provider value={{ setTasks, tasks }}>
                 <HomeContainer>
                     <Header />
+                    <TasksList />
                 </HomeContainer>
             </TasksContext.Provider>
         </>
